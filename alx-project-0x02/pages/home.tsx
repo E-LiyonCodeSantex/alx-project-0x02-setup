@@ -1,14 +1,19 @@
+import Card from "@/components/common/card";
 import Header from "@/components/layout/Header";
-import React from "react";
+import { CARDLISTINGSAMPLE } from "@/constant";
 
 const Home: React.FC = () => {
     return (
-        <div className="relative h-screen">
+        <div className="flex flex-col bg-white">
             <Header />
 
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h1 className="bg-white rounded text-blue-600 text-3xl p-4 hover:text-white hover:bg-blue-600 transition duration-500">Home page</h1>
-            </div>
+            <main className="flex justify-between h-[100%] bg-white items-start gap-4 p-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {CARDLISTINGSAMPLE.map((card, index) => (
+                        <Card key={index} title={card.title} content={card.content} />
+                    ))}
+                </div>
+            </main>
 
         </div>
     )
