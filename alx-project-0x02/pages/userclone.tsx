@@ -8,8 +8,8 @@ interface UsersPageProps {
 }
 
 export const getStaticProps = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users?_limit=6");
-  const data = await response.json();
+  const res = await fetch("https://jsonplaceholder.typicode.com/users?_limit=6");
+  const data = await res.json();
 
   const users: UserProps[] = data.map((user: any) => ({
     name: user.name,
@@ -21,9 +21,7 @@ export const getStaticProps = async () => {
   }));
 
   return {
-    props: {
-      users,
-    },
+    props: { users },
   };
 };
 
@@ -32,7 +30,7 @@ const UsersPage: React.FC<UsersPageProps> = ({ users }) => {
     <div className="min-h-screen bg-gray-100">
       <Header />
       <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4">User Directory</h1>
+        <h1 className="text-2xl font-bold mb-6">User Directory</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {users.map((user, index) => (
             <UserCard
