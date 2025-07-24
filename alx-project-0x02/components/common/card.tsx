@@ -1,5 +1,5 @@
 import { CardProps } from "@/interfaces/index"
-import { CARDLISTINGSAMPLE } from "@/constant/index";
+import { CARDLISTINGSAMPLE } from "@/constants/index";
 
 const Card: React.FC<CardProps> = ({title, content}) =>{
     return(
