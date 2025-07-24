@@ -1,3 +1,4 @@
+// pages/users.tsx
 import React from "react";
 import UserCard from "@/components/common/UserCard";
 import { type UserProps } from "@/interfaces";
@@ -7,9 +8,9 @@ interface UsersPageProps {
   users: UserProps[];
 }
 
-export const getStaticProps = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users?_limit=6");
-  const data = await response.json();
+export async function getStaticProps() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users?_limit=6");
+  const data = await res.json();
 
   const users: UserProps[] = data.map((user: any) => ({
     name: user.name,
@@ -21,11 +22,9 @@ export const getStaticProps = async () => {
   }));
 
   return {
-    props: {
-      users,
-    },
+    props: { users },
   };
-};
+}
 
 const UsersPage: React.FC<UsersPageProps> = ({ users }) => {
   return (
