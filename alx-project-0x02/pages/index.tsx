@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header"
 
 
-export default function Home() {
+export default function Index() {
   return (
     <div className="relative h-screen">
       <Header />
