@@ -1,37 +1,37 @@
-// pages/home.tsx
-import React, { useState } from 'react';
-import Card from '@/components/common/Card';
-import PostModal from '@/components/common/PostModal';
-import { CARDLISTINGSAMPLE } from '@/constants/index';
-import { CardProps } from '@/interfaces';
-import Header from '@/components/layout/Header';
+import React, { useEffect, useState } from "react";
+import PostCard from "@/components/common/PostCard";
+import { type PostProps } from "@/interfaces";
+import Header from "@/components/layout/Header";
 
-export default function Home() {
-  const [showModal, setShowModal] = useState(false);
-  const [posts, setPosts] = useState<CardProps[]>(CARDLISTINGSAMPLE);
+export default function PostsPage() {
+  const [posts, setPosts] = useState<PostProps[]>([]);
 
-  const handleAddPost = (newPost: CardProps) => {
-    setPosts((prev) => [newPost, ...prev]);
-  };
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts?_limit=6")
+      .then((res) => res.json())
+      .then((data) => {
+        const formattedPosts = data.map((post: any) => ({
+          userId: post.userId,
+          title: post.title,
+          content: post.body,
+        }));
+        setPosts(formattedPosts);
+      });
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
       <div className="p-6">
-        <button
-          onClick={() => setShowModal(true)}
-          className="mb-6 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition duration-300"
-        >
-          Add New Post
-        </button>
-
-        {showModal && (
-          <PostModal onClose={() => setShowModal(false)} onSubmit={handleAddPost} />
-        )}
-
+        <h1 className="text-2xl font-bold mb-4">Recent Posts</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {posts.map((card, index) => (
-            <Card key={index} title={card.title} content={card.content} />
+          {posts.map((post, index) => (
+            <PostCard
+              key={index}
+              userId={post.userId}
+              title={post.title}
+              content={post.content}
+            />
           ))}
         </div>
       </div>
