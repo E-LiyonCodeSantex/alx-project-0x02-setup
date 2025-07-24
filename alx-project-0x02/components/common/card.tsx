@@ -9,6 +9,7 @@ const Card: React.FC<CardProps> = ({title, content}) =>{
             <p className="flex flex-wrap w-full justify-center items-center">
                 {content}
             </p>
+            <span></span>
         </div>
     )
 }
