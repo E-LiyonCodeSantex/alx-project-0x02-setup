@@ -1,17 +1,20 @@
-import Header from "@/components/layout/Header";
-import React from "react";
+import React from 'react';
+import Button from '@/components/common/Button';
+import Header from '@/components/layout/Header';
 
-const About: React.FC = () => {
-    return (
-        <div className="relative h-screen">
-            <Header />
+const About = () => {
+  return (
+    <div className="min-h-screen bg-gray-100 ">
+      <Header />
+      <h1 className="text-2xl font-bold mb-6">About Us</h1>
 
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h1 className="bg-white rounded text-blue-600 text-3xl p-4 hover:text-white hover:bg-blue-600 transition duration-500">About us page</h1>
-            </div>
-
-        </div>
-    )
-}
+      <div className="flex gap-6 flex-wrap p-8">
+        <Button text="Small & Rounded" size="small" shape="rounded-sm" />
+        <Button text="Medium & Pill" size="medium" shape="rounded-md" />
+        <Button text="Large & Rounded" size="large" shape="rounded-full" />
+      </div>
+    </div>
+  );
+};
 
 export default About;
