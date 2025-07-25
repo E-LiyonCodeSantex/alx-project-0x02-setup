@@ -1,14 +1,11 @@
-import React from "react";
 import { GetStaticProps } from "next";
+import React from "react";
 import UserCard from "@/components/common/UserCard";
 import Header from "@/components/layout/Header";
 import { UserProps } from "@/interfaces";
 
-interface UsersPageProps {
-  users: UserProps[];
-}
-
-export const getStaticProps: GetStaticProps<UsersPageProps> = async () => {
+// 👇 Explicitly named export as a top-level constant 👀
+export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/users?_limit=6");
   const data = await res.json();
 
@@ -25,6 +22,10 @@ export const getStaticProps: GetStaticProps<UsersPageProps> = async () => {
     props: { users },
   };
 };
+
+interface UsersPageProps {
+  users: UserProps[];
+}
 
 const UsersPage: React.FC<UsersPageProps> = ({ users }) => {
   return (
@@ -48,3 +49,4 @@ const UsersPage: React.FC<UsersPageProps> = ({ users }) => {
 };
 
 export default UsersPage;
+
